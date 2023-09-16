@@ -1,0 +1,9 @@
+venv
+env
+.venv
+.env
+
+Ripes*
+
+.vscode
+*cache
