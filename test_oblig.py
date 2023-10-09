@@ -1,10 +1,17 @@
 import pytest
 import os
 import re
+import platform
 
-RIPES_PATH = r"C:/Users/smk1/Documents/NTNU/TDT4160/Ripes-v2.2.6-win-x86_64/Ripes.exe"
-ØVING_2_PATH = "Øving2/2.s"
-ØVING_3_PATH = "Øving3/3.s"
+pwd = os.getcwd()
+if platform.system() == "Windows" or platform.system() == "Darwin":
+    RIPES_PATH = f"{pwd}/Ripes/Ripes.exe"
+if platform.system() == "Linux":
+    RIPES_PATH = f"{pwd}.AppImage"
+
+
+ØVING_2_PATH = "Øvinger/2.s"
+ØVING_3_PATH = "Øvinger/3.s"
 RIPES_ARGUMENTS = "--mode cli -t asm --proc RV32_5S --isaexts M --regs"
 
 
