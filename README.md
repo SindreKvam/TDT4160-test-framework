@@ -5,6 +5,9 @@
 ## Prerequisites
 Python needs to be installed.
 
+## Information
+If the test runs for longer than 10 seconds. There is most likely an infinite loop somewhere in the test-code. Running a test has only been observed to take less than 1 second. Using Ripes via the command-line removes a lot of delay.
+
 ## Installation
 
 Install required python libraries:
