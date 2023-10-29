@@ -13,6 +13,7 @@ if platform.system() == "Linux":
 ØVING_2_PATH = "Øvinger/2.s"
 ØVING_3_PATH = "Øvinger/3.s"
 ØVING_4_PATH = "Øvinger/4.s"
+ØVING_5_PATH = "Øvinger/5.s"
 RIPES_ARGUMENTS = "--mode cli -t asm --proc RV32_5S --isaexts M --regs"
 
 
@@ -123,3 +124,34 @@ def test_oving4():
     for i in range(len(expected_results)):
         for j in range(len(expected_results[i])):
             assert output[i][j] == expected_results[i][j]
+
+
+def test_oving5():
+    extra_arguments = f"--src {ØVING_5_PATH}"
+    init_registers_cmd = "--reginit"
+
+    # Sender inn default register for alle eksempler
+    default_registers = [
+        "10=0,11=3",
+        "10=0xbeef,11=3",
+        "10=0xbeef,11=5",
+        "10=0xbaba130,11=1",
+        "10=42,11=100",
+    ]
+    output = []
+    for i, register in enumerate(default_registers):
+        stream = os.popen(
+            f"{RIPES_PATH} {RIPES_ARGUMENTS} {extra_arguments} {register}"
+        )
+        o = stream.read()
+
+        print(o)
+
+        a0_register = int(re.findall(r"x10:\t([-|\d]*)\t", o)[0])
+        output.append(a0_register)
+
+    assert output[0] == 64284
+    assert output[1] == 32117
+    assert output[3] == 63897
+    assert output[4] == 37194
+    assert output[5] == 64966
